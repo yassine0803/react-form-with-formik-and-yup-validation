@@ -91,4 +91,9 @@ export default makeStyles((theme) => ({
     border: "1px",
     borderColor: "white",
   },
+  errorPassword: {
+    color: '#f44336',
+    marginLeft: '14px',
+    fontSize: '0.75rem'
+  }
 }));

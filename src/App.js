@@ -1,6 +1,7 @@
 import useStyles from "./Styles";
 import { useState } from "react";
-import clsx from "clsx";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import {
   MenuItem,
   TextField,
@@ -9,11 +10,23 @@ import {
   IconButton,
   InputAdornment,
   FormControl,
-  Button,
   Box,
   Typography,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+
+const validationSchema = yup.object({
+  name: yup.string().required("name is required"),
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("email is required"),
+  profession: yup.string().required("profession is required"),
+  password: yup
+    .string()
+    .required("No password provided.")
+    .min(8, "Minimum 8 characters"),
+});
 function App() {
   const styles = useStyles();
   const [values, setValues] = useState({
@@ -24,11 +37,18 @@ function App() {
     showPassword: false,
     emailFalse: false,
   });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      profession: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values));
+    },
+    validationSchema: validationSchema,
+  });
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -37,14 +57,11 @@ function App() {
     event.preventDefault();
   };
 
-  const handleChangeEmail = (event) => {
-    console.log(event.target.value);
-  };
   return (
     <div className={styles.root}>
       <div className={styles.leftsection}>
         <div className={styles.leftsection_steps}>Step 1 of 3</div>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
           <Box className={styles.box} m={0} p={0}>
             <Typography className={styles.title} variant="h4">
               Let's set up your account
@@ -62,6 +79,11 @@ function App() {
               label="Your name"
               variant="outlined"
               className={styles.input}
+              value={formik.values.name}
+              onChange={formik.handleChange("name")}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+              onBlur={formik.handleBlur}
               fullWidth
             />
           </Box>
@@ -71,18 +93,29 @@ function App() {
               label="Email adress"
               variant="outlined"
               className={styles.input}
-              onBlur={handleChangeEmail}
+              value={formik.values.email}
+              onChange={formik.handleChange("email")}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              onBlur={formik.handleBlur}
               fullWidth
             />
           </Box>
           <Box className={styles.box} mt={2} mb={2}>
             <TextField
-            fullWidth
+              fullWidth
               id="outlined-select-currency"
               select
               label="Select"
               variant="outlined"
+              value={formik.values.profession}
               className={styles.input}
+              onChange={formik.handleChange("profession")}
+              error={
+                formik.touched.profession && Boolean(formik.errors.profession)
+              }
+              helperText={formik.touched.profession && formik.errors.profession}
+              onBlur={formik.handleBlur}
             >
               <MenuItem value="test">test</MenuItem>
             </TextField>
@@ -96,8 +129,10 @@ function App() {
               className={styles.input}
               id="outlined-adornment-password"
               type={!values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
+              value={formik.values.password}
+              onChange={formik.handleChange("password")}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              onBlur={formik.handleBlur}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -114,10 +149,16 @@ function App() {
             />
           </FormControl>
           <Box className={styles.box} mt={1} p={0}>
-            <Typography variant="caption">Minimum 8 characters</Typography>
+            {formik.touched.password && Boolean(formik.errors.password) && (
+              <Typography className={styles.errorPassword} variant="caption">
+                {formik.errors.password}
+              </Typography>
+            )}
           </Box>
           <Box className={styles.box} mt={2} mb={2}>
-            <button className={styles.btn}>Next</button>
+            <button type="submit" className={styles.btn}>
+              Next
+            </button>
           </Box>
           <Box className={styles.box} mt={2} mb={2}>
             <Typography variant="body2" className={styles.test}>
