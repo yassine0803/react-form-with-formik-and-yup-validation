@@ -150,6 +150,7 @@
   width: 44px;
   height: 44px;
   position: relative;
+  transition: opacity 4s ease-out;
 }
 .list li span {
   display: none;
@@ -193,6 +194,7 @@
   width: 140px;
   height: 44px;
   font-size: 12px;
+  transition: opacity 4s ease-out;
 }
 .logo img {
   width: 19px;
@@ -247,4 +249,37 @@
 .showHidePassword {
   position: absolute;
   right: 10px;
+}
+@media only screen and (max-width: 1200px) {
+  .leftsection{
+    width: 90%;
+  }
+  .rightsection{
+    display: none;
+  }
+  .testa{
+    bottom: 10px;
+    align-items: flex-end;
+  }
+  .form {
+    width: 60%;
+  }
+  .list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-right: 12px;
+    
+  }
+  .list li {
+    margin-top:  7px;
+    border-color: rgb(40, 110, 250);
+  }
+  .logo{
+    align-self:flex-end;
+    opacity: 0.9;
+    border-color: rgb(40, 110, 250);
+  }
 }
