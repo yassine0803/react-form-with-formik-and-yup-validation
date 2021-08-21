@@ -151,6 +151,7 @@
   height: 44px;
   position: relative;
   transition: opacity 4s ease-out;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .list li span {
   display: none;
@@ -195,6 +196,7 @@
   height: 44px;
   font-size: 12px;
   transition: opacity 4s ease-out;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .logo img {
   width: 19px;
@@ -275,11 +277,11 @@
   }
   .list li {
     margin-top:  7px;
-    border-color: rgb(40, 110, 250);
+    
   }
   .logo{
     align-self:flex-end;
     opacity: 0.9;
-    border-color: rgb(40, 110, 250);
+    
   }
 }
