@@ -2,6 +2,11 @@ import useStyles from "./Styles";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import logo from "./images/in.png";
+import message from "./images/message.png";
+import loupe from "./images/loupe.png";
+import code from "./images/code.png";
+import menu from "./images/menu.png";
 import {
   MenuItem,
   TextField,
@@ -176,6 +181,31 @@ function App() {
           Lorem ipsum dolor sit amet consec tetur adipiscing elit. Phasellus
           condi mentum ligula at nibh fermentum facilisis.
         </p>
+      </div>
+      <div className={styles.testa}>
+        <div className={styles.logo}>
+          <img src={logo} alt="" />
+          <span>Made in InVision</span>
+        </div>
+        <ul className={styles.list}>
+          <li>
+            <img src={message} alt="" />
+            <span>Comments (17)</span>
+            <div className={styles.notification}></div>
+          </li>
+          <li>
+            <img src={loupe} alt="" />
+            <span>Search</span>
+          </li>
+          <li>
+            <img src={code} alt="" />
+            <span>Inspect</span>
+          </li>
+          <li>
+            <img src={menu} alt="" />
+            <span>Screens (13)</span>
+          </li>
+        </ul>
       </div>
     </div>
   );
