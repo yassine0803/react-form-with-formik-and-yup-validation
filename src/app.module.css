@@ -60,41 +60,191 @@
   align-items: center;
 }
 
-.form_group {
+.box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   position: relative;
-  height: 30px;
-  margin: 20px 0;
+  height: 50px;
+  /*margin: 20px 0;*/
+  margin-top: 30px;
 }
-.form_group input,
-select {
+.box .input {
   width: 100%;
   margin: 0;
-  padding: 20px 0px;
+  padding: 20px 0px 20px 20px;
   border: 1px;
   border: 1px solid rgb(237, 237, 237);
   border-radius: 4px;
 }
-.form_group .form_label {
+.box .select {
+  width: 105.4%;
+  margin: 0;
+  padding: 20px;
+  border: 1px;
+  border: 1px solid rgb(237, 237, 237);
+  border-radius: 4px;
+  background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>")
+    no-repeat;
+  background-position: calc(100% - 0.75rem) center !important;
+  -moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+.Selectlabel {
   position: absolute;
-  top: 3px;
+  left: 10px;
+  color: rgb(146, 146, 146);
+}
+.input:focus ~ .label,
+.input:not(:placeholder-shown).input:not(:focus) ~ .label {
+  position: absolute;
+  top: -13px;
+  left: 10px;
+  color: rgb(146, 146, 146);
+  background-color: white;
+}
+
+.selectLabelfocus {
+  position: absolute;
+  top: -13px;
+  left: 10px;
+  color: rgb(146, 146, 146);
+  background-color: white;
+}
+.label {
+  position: absolute;
   left: 10px;
   color: rgb(146, 146, 146);
 }
 
-.form_group:active .form_label {
-  position: absolute;
-  top: -34px;
-  left: 10px;
-  color: rgb(146, 146, 146);
+.testa {
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-input:focus + .form_label, input:valid + .form_label {
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 12px;
+}
+.list li {
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 100%;
+  margin: auto 4px;
+  width: 44px;
+  height: 44px;
+  position: relative;
+}
+.list li span {
+  display: none;
+}
+.list li:hover {
+  opacity: 1;
+  cursor: pointer;
+  width: 140px;
+  border-radius: 100px;
+  justify-content: space-around;
+}
+.list li:hover span {
+  display: inline;
+  width: 95px;
+  font-size: 12px;
+}
+.list img {
+  width: 19px;
+  height: 18px;
+}
+.notification {
   position: absolute;
-  top: -34px;
-  left: 10px;
-  color: rgb(146, 146, 146);
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: red;
+  top: 0;
+  right: 0;
+}
+.logo {
+  opacity: 0.7;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 100px;
+  margin-left: 14px;
+  padding: 0 14px;
+  width: 140px;
+  height: 44px;
+  font-size: 12px;
+}
+.logo img {
+  width: 19px;
+  height: 18px;
+}
+.logo:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.link {
+  color: #286efa;
+  font-weight: bold;
+}
+
+.title {
+  font-weight: bold;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 34px;
+}
+.subtitle {
+  font-size: 14px;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.boxError {
+  color: #f44336;
+  margin-left: 14px;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  width: 100%;
+}
+
+.btn {
+  padding: 20px;
+  height: 60px;
+  min-height: 0;
+  min-width: 0;
+  background-color: rgb(40, 110, 250);
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  width: 105%;
+}
+
+.terms {
+  font-size: 11.5px;
+}
+
+.showHidePassword {
+  position: absolute;
+  right: 10px;
 }

@@ -1,4 +1,3 @@
-import useStyles from "./Styles";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -7,19 +6,10 @@ import message from "./images/message.png";
 import loupe from "./images/loupe.png";
 import code from "./images/code.png";
 import menu from "./images/menu.png";
-import {
-  MenuItem,
-  TextField,
-  OutlinedInput,
-  InputLabel,
-  IconButton,
-  InputAdornment,
-  FormControl,
-  Box,
-  Typography,
-} from "@material-ui/core";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import eye from "./images/eye.png";
+import invisible from "./images/invisible.png";
 
+import styles from "./app.module.css";
 const validationSchema = yup.object({
   name: yup.string().required("name is required"),
   email: yup
@@ -33,15 +23,8 @@ const validationSchema = yup.object({
     .min(8, "Minimum 8 characters"),
 });
 function App() {
-  const styles = useStyles();
-  const [values, setValues] = useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
-    emailFalse: false,
-  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [selectLabelOnTop, setSelectLabelOnTop] = useState(false);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -54,125 +37,128 @@ function App() {
     },
     validationSchema: validationSchema,
   });
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const slectOnBlur = (e) => {
+    formik.values.profession
+      ? setSelectLabelOnTop(true)
+      : setSelectLabelOnTop(false);
+    formik.handleBlur(e);
   };
-
   return (
     <div className={styles.root}>
       <div className={styles.leftsection}>
         <div className={styles.leftsection_steps}>Step 1 of 3</div>
         <form className={styles.form} onSubmit={formik.handleSubmit}>
-          <Box className={styles.box} m={0} p={0}>
-            <Typography className={styles.title} variant="h4">
+          <div className={styles.box}>
+            <h1 className={styles.title} variant="h4">
               Let's set up your account
-            </Typography>
-          </Box>
-          <Box className={styles.box} mb={3} mt={3} p={0}>
-            <Typography className={styles.subtitle} variant="body1">
+            </h1>
+          </div>
+          <div className={styles.box}>
+            <p className={styles.subtitle}>
               Already have an account?
               <span className={styles.link}> Sign In</span>
-            </Typography>
-          </Box>
-          <Box className={styles.box} mt={2} mb={2}>
-            <TextField
-              id="outlined-basic"
-              label="Your name"
-              variant="outlined"
+            </p>
+          </div>
+          <div className={styles.box}>
+            <input
               className={styles.input}
               value={formik.values.name}
               onChange={formik.handleChange("name")}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
               onBlur={formik.handleBlur}
-              fullWidth
+              placeholder=""
             />
-          </Box>
-          <Box className={styles.box} mt={2} mb={2}>
-            <TextField
-              id="outlined-basic"
-              label="Email adress"
-              variant="outlined"
+            <label className={styles.label}>Your name</label>
+          </div>
+          <div className={styles.boxError}>
+            {formik.touched.name && Boolean(formik.errors.name) && (
+              <span className={styles.errorPassword}>{formik.errors.name}</span>
+            )}
+          </div>
+          <div className={styles.box}>
+            <input
               className={styles.input}
               value={formik.values.email}
               onChange={formik.handleChange("email")}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
               onBlur={formik.handleBlur}
-              fullWidth
+              placeholder=""
             />
-          </Box>
-          <Box className={styles.box} mt={2} mb={2}>
-            <TextField
-              fullWidth
-              id="outlined-select-currency"
-              select
-              label="Select"
-              variant="outlined"
+            <label className={styles.label}>Email address</label>
+          </div>
+          <div className={styles.boxError}>
+            {formik.touched.email && Boolean(formik.errors.email) && (
+              <span className={styles.errorPassword}>
+                {formik.errors.email}
+              </span>
+            )}
+          </div>
+          <div className={styles.box}>
+            <select
+              className={styles.select}
               value={formik.values.profession}
-              className={styles.input}
               onChange={formik.handleChange("profession")}
-              error={
-                formik.touched.profession && Boolean(formik.errors.profession)
-              }
-              helperText={formik.touched.profession && formik.errors.profession}
-              onBlur={formik.handleBlur}
+              onBlur={slectOnBlur}
+              onClick={() => setSelectLabelOnTop(true)}
             >
-              <MenuItem value="test">test</MenuItem>
-            </TextField>
-          </Box>
-          <FormControl className={styles.test} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              fullWidth
+              {selectLabelOnTop && (
+                <>
+                  <option value="developer">Developer</option>
+                  <option value="translator">Translator</option>
+                </>
+              )}
+            </select>
+            <label
+              className={
+                !selectLabelOnTop ? styles.Selectlabel : styles.selectLabelfocus
+              }
+            >
+              I would describe my user type as
+            </label>
+          </div>
+          <div className={styles.boxError}>
+            {formik.touched.profession && Boolean(formik.errors.profession) && (
+              <span className={styles.errorPassword}>
+                {formik.errors.profession}
+              </span>
+            )}
+          </div>
+          <div className={styles.box}>
+            <input
               className={styles.input}
-              id="outlined-adornment-password"
-              type={!values.showPassword ? "text" : "password"}
               value={formik.values.password}
               onChange={formik.handleChange("password")}
-              error={formik.touched.password && Boolean(formik.errors.password)}
               onBlur={formik.handleBlur}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {!values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              labelWidth={70}
+              placeholder=""
+              type={showPassword ? "text" : "password"}
             />
-          </FormControl>
-          <Box className={styles.box} mt={1} p={0}>
+            <label className={styles.label}>Password</label>
+            <img
+              className={styles.showHidePassword}
+              src={showPassword ? invisible : eye}
+              onClick={() => setShowPassword((oldValue) => !oldValue)}
+              alt=""
+            />
+          </div>
+          <div className={styles.boxError}>
             {formik.touched.password && Boolean(formik.errors.password) && (
-              <Typography className={styles.errorPassword} variant="caption">
+              <span className={styles.errorPassword}>
                 {formik.errors.password}
-              </Typography>
+              </span>
             )}
-          </Box>
-          <Box className={styles.box} mt={2} mb={2}>
+          </div>
+          <div className={styles.box}>
             <button type="submit" className={styles.btn}>
               Next
             </button>
-          </Box>
-          <Box className={styles.box} mt={2} mb={2}>
-            <Typography variant="body2" className={styles.test}>
+          </div>
+          <div className={styles.box}>
+            <p className={styles.terms}>
               By clicking the "Next" button, you agree to creating a free
               account, and{" "}
               <span className={styles.link}>Terms of Services</span> and
               <span className={styles.link}> Privacy Policy</span>.
-            </Typography>
-          </Box>
+            </p>
+          </div>
         </form>
       </div>
       <div className={styles.rightsection}>
