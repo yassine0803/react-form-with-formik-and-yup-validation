@@ -6,9 +6,7 @@ import message from "./images/message.png";
 import loupe from "./images/loupe.png";
 import code from "./images/code.png";
 import menu from "./images/menu.png";
-import eye from "./images/eye.png";
-import invisible from "./images/invisible.png";
-
+import TextInput from "./components/TextInput";
 import styles from "./app.module.css";
 const validationSchema = yup.object({
   name: yup.string().required("name is required"),
@@ -60,31 +58,25 @@ function App() {
               <span className={styles.link}> Sign In</span>
             </p>
           </div>
-          <div className={styles.box}>
-            <input
-              className={styles.input}
-              value={formik.values.name}
-              onChange={formik.handleChange("name")}
-              onBlur={formik.handleBlur}
-              placeholder=""
-            />
-            <label className={styles.label}>Your name</label>
-          </div>
+          <TextInput
+            formikValue={formik.values.name}
+            formikHundleChange={formik.handleChange}
+            formikHundleBlur={formik.handleBlur}
+            label="Your name"
+            name="name"
+          />
           <div className={styles.boxError}>
             {formik.touched.name && Boolean(formik.errors.name) && (
               <span className={styles.errorPassword}>{formik.errors.name}</span>
             )}
           </div>
-          <div className={styles.box}>
-            <input
-              className={styles.input}
-              value={formik.values.email}
-              onChange={formik.handleChange("email")}
-              onBlur={formik.handleBlur}
-              placeholder=""
-            />
-            <label className={styles.label}>Email address</label>
-          </div>
+          <TextInput
+            formikValue={formik.values.email}
+            formikHundleChange={formik.handleChange}
+            formikHundleBlur={formik.handleBlur}
+            label="Email adress"
+            name="email"
+          />
           <div className={styles.boxError}>
             {formik.touched.email && Boolean(formik.errors.email) && (
               <span className={styles.errorPassword}>
@@ -99,6 +91,7 @@ function App() {
               onChange={formik.handleChange("profession")}
               onBlur={slectOnBlur}
               onClick={() => setSelectLabelOnTop(true)}
+              name="profession"
             >
               {selectLabelOnTop && (
                 <>
@@ -122,23 +115,15 @@ function App() {
               </span>
             )}
           </div>
-          <div className={styles.box}>
-            <input
-              className={styles.input}
-              value={formik.values.password}
-              onChange={formik.handleChange("password")}
-              onBlur={formik.handleBlur}
-              placeholder=""
-              type={showPassword ? "text" : "password"}
-            />
-            <label className={styles.label}>Password</label>
-            <img
-              className={styles.showHidePassword}
-              src={showPassword ? invisible : eye}
-              onClick={() => setShowPassword((oldValue) => !oldValue)}
-              alt=""
-            />
-          </div>
+          <TextInput
+            formikValue={formik.values.password}
+            formikHundleChange={formik.handleChange}
+            formikHundleBlur={formik.handleBlur}
+            label="Password"
+            name="password"
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
           <div className={styles.boxError}>
             {formik.touched.password && Boolean(formik.errors.password) && (
               <span className={styles.errorPassword}>

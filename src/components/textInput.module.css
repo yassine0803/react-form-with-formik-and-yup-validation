@@ -1,0 +1,39 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 50px;
+  /*margin: 20px 0;*/
+  margin-top: 30px;
+}
+.box .input {
+  width: 100%;
+  margin: 0;
+  padding: 20px 0px 20px 20px;
+  border: 1px;
+  border: 1px solid rgb(237, 237, 237);
+  border-radius: 4px;
+}
+
+.input:focus ~ .label,
+.input:not(:placeholder-shown).input:not(:focus) ~ .label {
+  position: absolute;
+  top: -13px;
+  left: 10px;
+  color: rgb(146, 146, 146);
+  background-color: white;
+}
+
+.label {
+  position: absolute;
+  left: 10px;
+  color: rgb(146, 146, 146);
+}
+
+.showHidePassword {
+  position: absolute;
+  right: 10px;
+}
