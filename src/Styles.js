@@ -96,7 +96,7 @@ export default makeStyles((theme) => ({
     marginLeft: "14px",
     fontSize: "0.75rem",
   },
-  testa: {
+  footer: {
     position: "fixed",
     width: "100%",
     height: "70px",

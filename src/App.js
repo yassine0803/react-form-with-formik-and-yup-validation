@@ -153,7 +153,7 @@ function App() {
           condi mentum ligula at nibh fermentum facilisis.
         </p>
       </div>
-      <div className={styles.testa}>
+      <div className={styles.footer}>
         <div className={styles.logo}>
           <img src={logo} alt="" />
           <span>Made in InVision</span>
